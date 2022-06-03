@@ -7,7 +7,7 @@ const __dirname = path.resolve();
 const p = path.join(__dirname, "data", "products.json");
 
 export class Product {
-  constructor(title, price , description , image_url ) {
+  constructor(title, price, description, image_url) {
     this.title = title;
     this.price = price;
     this.description = description;
@@ -15,9 +15,7 @@ export class Product {
   }
 
   save = () => {
-    console.log("Saving product");
-    // products.push(this);
-
+    this.id = Math.random().toString();
     fs.readFile(p, (err, data) => {
       let products = [];
 
@@ -40,6 +38,18 @@ export class Product {
         cb(JSON.parse(data));
       } else {
         cb([]);
+      }
+    });
+  };
+
+  static findById = (id, cb) => {
+    fs.readFile(p, (err, data) => {
+      if (!err) {
+        const products = JSON.parse(data);
+        const product = products.find((p) => p.id === id);
+        cb(product);
+      } else {
+        cb(null);
       }
     });
   };

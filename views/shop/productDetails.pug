@@ -1,4 +1,14 @@
 extends ../layout/layout.pug
 
 block content
-    h1 Product Details
+   
+   main.centered
+         
+                    h1.product__title #{product.title}
+
+                    img(src=product.image_url  alt="A Book" class="product__image")
+                    .product__price $ #{product.price}
+                      p.product__description #{product.description}
+                    form(action="/cart" method="POST")
+                     button.btn Add to Cart
+                     input(type="hidden" name="productId" value=product.id)
