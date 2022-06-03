@@ -11,13 +11,15 @@ app.set("view engine" , "pug")
 import {router} from './routes/admin.js';
 import shopRoutes from './routes/shop.js';
 
-import {error_page} from "./controllers/product.js"
+import {error_page} from "./controllers/error.js";
 
 const __dirname = path.resolve();
 
 
 app.use(urlencoded({extended: false}));
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/admin', router);
 app.use(shopRoutes);
