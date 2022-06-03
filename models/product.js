@@ -7,9 +7,11 @@ const __dirname = path.resolve();
 const p = path.join(__dirname, "data", "products.json");
 
 export class Product {
-  constructor(title, price) {
+  constructor(title, price , description , image_url ) {
     this.title = title;
     this.price = price;
+    this.description = description;
+    this.image_url = image_url;
   }
 
   save = () => {
@@ -21,6 +23,7 @@ export class Product {
 
       if (!err) {
         products = JSON.parse(data);
+        console.log(JSON.parse(data));
       }
 
       products.push(this);
