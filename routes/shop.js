@@ -20,7 +20,7 @@ router.get("/", getIndex);
 
 router.get("/products", get_products);
 
-router.get("/product/:productId", get_product);
+router.get("/products/:productId", get_product);
 
 router.get("/cart", product_cart);
 

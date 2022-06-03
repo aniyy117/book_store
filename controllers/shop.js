@@ -16,7 +16,7 @@ export const get_product = (req, res, next) => {
     res.render("shop/productDetails", {
       product: product,
       docTitle: "Product Detail",
-      path: `/products/`,
+      path: `/products`,
     });
   });
 };
