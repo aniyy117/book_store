@@ -1,56 +1,73 @@
 import fs from "fs";
 import path from "path";
-import express from "express";
+
+import { Cart } from "./cart.js";
 
 const __dirname = path.resolve();
 
 const p = path.join(__dirname, "data", "products.json");
 
+const getProductsFromFile = cb => {
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      cb([]);
+    } else {
+      cb(JSON.parse(fileContent));
+    }
+  });
+};
+
+
 export class Product {
-  constructor(title, price, description, image_url) {
+  constructor(id ,title, imageUrl, description, price) {
+    this.id = id;
     this.title = title;
-    this.price = price;
+    this.imageUrl = imageUrl;
     this.description = description;
-    this.image_url = image_url;
+    this.price = price;
   }
+  save() {
 
-  save = () => {
-    this.id = Math.random().toString();
-    fs.readFile(p, (err, data) => {
-      let products = [];
-
-      if (!err) {
-        products = JSON.parse(data);
-        console.log(JSON.parse(data));
+    getProductsFromFile(products => {
+      if(this.id){
+        const existingProductIndex = products.findIndex(p=>p.id === this.id);
+        const updatedProducts = [...products];
+        updatedProducts[existingProductIndex] = this;
+        fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+          console.log(err);
+        });
       }
 
+      else{
+      this.id = Math.random().toString();
       products.push(this);
-
-      fs.writeFile(p, JSON.stringify(products), (err) => {
+      fs.writeFile(p, JSON.stringify(products), err => {
         console.log(err);
       });
-    });
-  };
+    }});
+  }
 
-  static fetchAll = (cb) => {
-    fs.readFile(p, (err, data) => {
-      if (!err) {
-        cb(JSON.parse(data));
-      } else {
-        cb([]);
-      }
-    });
-  };
+  static fetchAll(cb) {
+    getProductsFromFile(cb);
+  }
 
-  static findById = (id, cb) => {
-    fs.readFile(p, (err, data) => {
-      if (!err) {
-        const products = JSON.parse(data);
-        const product = products.find((p) => p.id === id);
-        cb(product);
-      } else {
-        cb(null);
-      }
+  static findById(id, cb) {
+    getProductsFromFile(products => {
+      const product = products.find(p => p.id === id);
+      cb(product);
     });
-  };
+  }
+
+  static deleteById(id){
+    console.log(id , "id")
+    getProductsFromFile(products=>{
+      const updatedProducts = products.filter(prod=>prod.id !== id);
+      fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+        console.log(err);
+        if(!err){
+          Cart.deleteProduct(id, products.price);
+        }
+      });
+    })
+  }
 }

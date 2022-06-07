@@ -193,6 +193,7 @@ form {
   background: white;
   border-radius: 3px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .btn:hover,
@@ -200,6 +201,60 @@ form {
   background-color: #00695c;
   color: white;
 }
+
+.btn-danger{
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
+  font: inherit;
+  border: 1px solid red;
+  color: red;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-danger:hover,
+.btn-danger :active {
+  background-color: red;
+  color: white;
+}
+
+
+.container {
+  width: 100%;
+}
+
+.row{
+  margin: auto;
+}
+
+
+.table {
+  text-align: center;
+  position: relative;
+  border-collapse: collapse; 
+  width: 100%;
+}
+
+th, td {
+  padding: 0.25rem;
+}
+
+
+tr th {
+  background: #00695c;
+  color: white;
+}
+
+th {
+  background: white;
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
 
 @media (min-width: 768px) {
   .main-header__nav {

@@ -2,7 +2,7 @@ import path from 'path';
 
 import { Router } from 'express';
 
-import {add_product , post_product , get_products } from "../controllers/admin.js"
+import {getAddProduct , getEditProduct, getProducts , postAddProduct , postEditProduct , deleteProduct } from "../controllers/admin.js"
 
 
 export const router = Router();
@@ -12,8 +12,16 @@ const __dirname = path.resolve();
 
 
 // /admin/add-product => GET
-router.get('/add-product', add_product);
+router.get('/add-product', getAddProduct);
 
-router.get('/products', get_products);
+// /admin/products => GET
+router.get('/products', getProducts);
 
-router.post('/add-product',post_product);
+// /admin/add-product => POST
+router.post('/add-product', postAddProduct);
+
+router.get('/edit-product/:id', getEditProduct);
+
+router.post('/edit-product', postEditProduct);
+
+router.post('/delete-product/:id', deleteProduct);
