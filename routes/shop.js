@@ -2,32 +2,27 @@ import path from "path";
 
 import { Router } from "express";
 
-import {
-  get_products,
-  getIndex,
-  product_cart,
-  checkout,
-  get_orders,
-  get_product,
-  post_cart,
-} from "../controllers/shop.js";
+import {getIndex , getProducts , getCart , getOrders , getCheckout , postCart , getProduct , postCartDeleteProduct} from "../controllers/shop.js";
 
 const __dirname = path.resolve();
 
 const router = Router();
 
-router.get("/", getIndex);
+router.get('/', getIndex);
 
-router.get("/products", get_products);
+router.get('/products', getProducts);
 
-router.get("/products/:productId", get_product);
+router.get('/products/:productId', getProduct);
 
-router.get("/cart", product_cart);
+router.get('/cart', getCart);
 
-router.post("/cart", post_cart);
+router.post('/cart', postCart);
 
-router.get("/checkout", checkout);
+router.post('/cart-delete-item/:productId', postCartDeleteProduct);
 
-router.get("/orders", get_orders);
+router.get('/orders', getOrders);
+
+router.get('/checkout', getCheckout);
+
 
 export default router;

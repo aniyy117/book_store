@@ -2,16 +2,21 @@ import path from 'path';
 
 import express from 'express';
 import pkg from 'body-parser';
+import {router} from './routes/admin.js';
+import shopRoutes from './routes/shop.js';
+
+import {error_page} from "./controllers/error.js";
+
 const { urlencoded } = pkg;
 
 const app = express();
 
 app.set("view engine" , "pug")
 
-import {router} from './routes/admin.js';
-import shopRoutes from './routes/shop.js';
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-import {error_page} from "./controllers/error.js";
+
 
 const __dirname = path.resolve();
 
@@ -23,8 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', router);
 app.use(shopRoutes);
-
-
 
 
 
