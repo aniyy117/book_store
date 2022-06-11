@@ -47,8 +47,6 @@ export class Cart {
 
       const product = updatedCart.products.findIndex(prod => prod.id === productId);
 
-      if(!product)return;
-
       const poductQty = product.quantity;
 
       updatedCart.products = updatedCart.products.filter(prod => prod.id !== productId);

@@ -2,34 +2,48 @@ import { Product } from "../models/product.js";
 import { Cart } from "../models/cart.js";
 
 export const getProducts = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/product-list", {
-      prods: products,
-      pageTitle: "All Products",
-      path: "/products",
-    });
-  });
+   Product.fetchAll()
+   .then(products => {
+      res.render("shop/product-list", {
+        prods: products,
+        pageTitle: "All Products",
+        path: "/products",
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
 };
 
 export const getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId, (product) => {
+  Product.findById(prodId)
+  .then(product => {
     res.render("shop/product-detail", {
       product: product,
       pageTitle: product.title,
       path: "/products",
     });
-  });
+  }
+  )
+  .catch(err => {
+    console.log(err);
+  }
+  )
 };
 
 export const getIndex = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/index", {
-      prods: products,
-      pageTitle: "Shop",
-      path: "/",
-    });
-  });
+  Product.fetchAll()
+  .then(products => {
+     res.render("shop/index", {
+       prods: products,
+       pageTitle: "shop",
+       path: "/",
+     });
+   })
+   .catch(err => {
+     console.log(err);
+   })
 };
 
 export const getCart = (req, res, next) => {
