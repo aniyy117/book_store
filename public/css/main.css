@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700'); */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 body {
   padding: 0;
   margin: 0;
-  /* font-family: 'Open Sans', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -19,7 +19,7 @@ form {
   display: inline;
 }
 
-.centered{
+.centered {
   text-align: center;
 }
 
@@ -169,10 +169,6 @@ form {
   width: 100%;
 }
 
-.product__image{
-  width: 50%;
-}
-
 .card__actions {
   padding: 1rem;
   text-align: center;
@@ -193,7 +189,6 @@ form {
   background: white;
   border-radius: 3px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .btn:hover,
@@ -202,59 +197,16 @@ form {
   color: white;
 }
 
-.btn-danger{
-  display: inline-block;
-  padding: 0.25rem 1rem;
-  text-decoration: none;
-  font: inherit;
-  border: 1px solid red;
+.btn.danger {
   color: red;
-  background: white;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: 0.3s;
+  border-color: red;
 }
 
-.btn-danger:hover,
-.btn-danger :active {
-  background-color: red;
+.btn.danger:hover,
+.btn.danger:active {
+  background: red;
   color: white;
 }
-
-
-.container {
-  width: 100%;
-}
-
-.row{
-  margin: auto;
-}
-
-
-.table {
-  text-align: center;
-  position: relative;
-  border-collapse: collapse; 
-  width: 100%;
-}
-
-th, td {
-  padding: 0.25rem;
-}
-
-
-tr th {
-  background: #00695c;
-  color: white;
-}
-
-th {
-  background: white;
-  position: sticky;
-  top: 0; /* Don't forget this, required for the stickiness */
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
-}
-
 
 @media (min-width: 768px) {
   .main-header__nav {
@@ -264,9 +216,4 @@ th {
   #side-menu-toggle {
     display: none;
   }
-
-  .product__image{
-    width: 20%;
-  }
-
 }

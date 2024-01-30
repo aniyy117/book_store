@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-const uri ="mongodb+srv://aniket:Sigdvpk5I6uIkMZE@cluster0.rhm8d.mongodb.net/shop?retryWrites=true&w=majority";
+const uri ="mongodb+srv://aniket:z7WRN4STtr6ic1X1@cluster0.rhm8d.mongodb.net/shop?retryWrites=true&w=majority";
 
 
 let _db ;

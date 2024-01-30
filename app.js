@@ -1,48 +1,24 @@
-import path from 'path';
+const path = require('path');
 
-import express from 'express';
-import pkg from 'body-parser';
-import {router} from './routes/admin.js';
-import shopRoutes from './routes/shop.js';
+const express = require('express');
+const bodyParser = require('body-parser');
 
-import {error_page} from "./controllers/error.js";
-
-
-import {MongoConnet} from "./util/database.js";
-
-const { urlencoded } = pkg;
+const errorController = require('./controllers/error');
 
 const app = express();
-
-app.set("view engine" , "pug")
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-
-const __dirname = path.resolve();
-
-
-app.use(urlencoded({extended: false}));
-
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use((req, res, next) => {
-    next();
-});
-
-app.use('/admin', router);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
+app.use(errorController.get404);
 
-
-app.use(error_page);
-
-
-MongoConnet((client)=>{
-
-});
-
-app.listen(4000);
+app.listen(3000);
