@@ -1,40 +1,8 @@
-import { MongoClient } from "mongodb";
-const uri ="mongodb+srv://aniket:z7WRN4STtr6ic1X1@cluster0.rhm8d.mongodb.net/shop?retryWrites=true&w=majority";
+const Sequelize = require('sequelize');
 
-
-let _db ;
-
-export const MongoConnet = callback =>{
-
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   serverApi: ServerApiVersion.v1,
-// });
-
-// client.connect((err) => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
-
-MongoClient.connect(uri)
-.then((client)=>{
-    console.log("connected");
-    _db = client.db();
-    // callback(client);
-})
-.catch((err)=>{
-    console.log(err);
+const sequelize = new Sequelize('node-complete', 'root', 'nodecomplete', {
+  dialect: 'mysql',
+  host: 'localhost'
 });
 
-}
-
-export const getDb = ()=>{
-
-    if(_db){
-        return _db;
-    }
-
-    throw "No database found";
-}
+module.exports = sequelize;
