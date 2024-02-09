@@ -1,19 +1,8 @@
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
+
+const transporter = require('../middleware/nodeMailSender');
 
 const User = require('../models/user');
-
-const transporter = nodemailer.createTransport({
-  service: "Gmail",
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-});
-
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
